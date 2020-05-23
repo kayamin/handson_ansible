@@ -8,7 +8,13 @@ RUN yum update -y && \
     # OpenSSｈサーバをインストール
     yum -y install openssh-server && \
     # sudo コマンドをインストール
-    yum install -y sudo
+    yum -y install sudo && \
+    # プロセス監視系のコマンドをインストール
+    yum -y install procps && \
+    yum -y install which && \
+    # ネットワーク関連のコマンドをインストール
+    yum -y install net-tools
+
 
 # sshd起動時に公開鍵が必要なため、作成
 RUN ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa
@@ -24,7 +30,7 @@ RUN echo "root:" | chpasswd
 # sshdを起動
 RUN /bin/systemctl enable sshd
 
-
 EXPOSE 22
+EXPOSE 5432
 
 CMD ["/sbin/init"]

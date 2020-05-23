@@ -20,22 +20,27 @@ postgresql_service_enabled: true
 postgresql_global_config_options:
   - option: unix_socket_directories
     value: '{{ postgresql_unix_socket_directories | join(",") }}'
+  # アクセスを許可する ip を指定する，すべての ip からのアクセスを許可
+  - option: listen_addresses
+    value: '*'
 
 # Host based authentication (hba) entries to be added to the pg_hba.conf. This
 # variable's defaults reflect the defaults that come with a fresh installation.
 postgresql_hba_entries:
   - {type: local, database: all, user: postgres, auth_method: peer}
   - {type: local, database: all, user: all, auth_method: peer}
-  - {type: host, database: all, user: all, address: '127.0.0.1/32', auth_method: md5}
-  - {type: host, database: all, user: all, address: '::1/128', auth_method: md5}
+  # 外部からの接続をパスワード認証にする
+  - {type: host, database: all, user: all, address: '0.0.0.0/0', auth_method: md5}
+#  - {type: host, database: all, user: all, address: '127.0.0.1/32', auth_method: md5}
+#  - {type: host, database: all, user: all, address: '::1/128', auth_method: md5}
 
 # Debian only. Used to generate the locales used by PostgreSQL databases.
 postgresql_locales:
   - 'en_US.UTF-8'
 
 # Databases to ensure exist.
-postgresql_databases: []
-# - name: exampledb # required; the rest are optional
+postgresql_databases:
+ - name: exampledb # required; the rest are optional
 #   lc_collate: # defaults to 'en_US.UTF-8'
 #   lc_ctype: # defaults to 'en_US.UTF-8'
 #   encoding: # defaults to 'UTF-8'
@@ -49,9 +54,9 @@ postgresql_databases: []
 #   state: # defaults to 'present'
 
 # Users to ensure exist.
-postgresql_users: []
-# - name: jdoe #required; the rest are optional
-#   password: # defaults to not set
+postgresql_users:
+ - name: jdoe #required; the rest are optional
+   password: pass # defaults to not set
 #   encrypted: # defaults to not set
 #   priv: # defaults to not set
 #   role_attr_flags: # defaults to not set
@@ -64,4 +69,4 @@ postgresql_users: []
 #   state: # defaults to 'present'
 
 # Whether to output user data when managing users.
-postgres_users_no_log: true
+postgres_users_no_log: false
