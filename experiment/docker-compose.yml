@@ -12,7 +12,9 @@ services:
     container_name: target01
     build: docker/target
     tty: true
+    privileged: true
   target02:
     container_name: target02
     build: docker/target
     tty: true
+    privileged: true
