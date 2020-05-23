@@ -1,7 +1,7 @@
 - hosts: target
   remote_user: root
-  tasks:
-  - name: "テストぉぉぉぉぉ"
-    ping:
-#    shell: |
-#      touch hoge
+  roles:
+    # 指定した role 内の taskディレクトリに含まれる main.yml が task として追加される
+    # 更に main.yml 内で include-tasks とすることで，他のymlファイルも task として追加することができる
+    - role: geerlingguy.postgresql
+      become: yes

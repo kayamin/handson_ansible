@@ -1,8 +1,12 @@
 # Amazon EC2
 FROM amazonlinux:latest
 
-# yumでOpenSSｈサーバをインストールする
-RUN yum -y install openssh-server
+# yumで必要なライブラリをインストールする
+RUN yum update -y && \
+    # python3 をインストール， このdockerコンテナ内でansibleを python3 で走らせるために必要
+    yum -y install python3
+    # OpenSSｈサーバをインストール
+    yum -y install openssh-server
 
 # sshd起動時に公開鍵が必要なため、作成
 RUN ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa
@@ -12,8 +16,8 @@ RUN ssh-keygen -f /etc/ssh/ssh_host_ed25519_key -N '' -t ed25519
 # rootでログインできるようにする
 RUN sed -ri 's/^#PermitEmptyPasswords no/PermitEmptyPasswords yes/' /etc/ssh/sshd_config
 
-# rootのパスワードを指定
-RUN echo "root:pass" | chpasswd
+# rootのパスワードを指定 ansible実行時に指定するのが手間なので一旦なしに
+RUN echo "root:" | chpasswd
 
 EXPOSE 22
 
