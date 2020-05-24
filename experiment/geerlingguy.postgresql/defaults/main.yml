@@ -56,7 +56,7 @@ postgresql_databases:
 # Users to ensure exist.
 postgresql_users:
  - name: jdoe #required; the rest are optional
-   password: pass # defaults to not set
+   password: "{{ dbuser_password_postgres }}" # defaults to not set
 #   encrypted: # defaults to not set
 #   priv: # defaults to not set
 #   role_attr_flags: # defaults to not set
