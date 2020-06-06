@@ -108,7 +108,7 @@ Ansible関連のファイル説明（必要なファイルのみ記述）
         ├── defaults             # main.yml で読み込まれる変数を定義するディレクトリ
         │   └── main.yml
         ├─── vars                # main.yml で読み込まれる変数を定義するディレクトリ, defaults を上書きできる
-        │   └── RedHat-2.yml        # amazonlinux でこのテンプレートを利用する際に使う定義ファイル，元々のこのファイルが定義されていなく amazonlinux で動かすために作成
+        │   └── RedHat-2.yml        # amazonlinux でこのテンプレートを利用する際に使う定義ファイル，元々のこのファイルは定義されていなく amazonlinux で動かすために作成
         ├── handlers
         │   └── main.yml
         ├── meta
@@ -126,11 +126,10 @@ Ansible関連のファイル説明（必要なファイルのみ記述）
         │   ├── setup-RedHat.yml
         │   ├── users.yml
         │   └── variables.yml
-        ├── templates           # templateモジュールでセットアップされるJinja2形式のテキストファイルを配置するディレクトリ
-        │   ├── pg_hba.conf.j2      # postgresql 設定ファイルのテンプレート，このテンプレートに変数を代入したファイルが taget に配置される
-        │   └── postgres.sh.j2      # postgresql 設定ファイルのテンプレート，このテンプレートに変数を代入したファイルが taget に配置される
-        └── vars                # main.yml で読み込まれる変数を定義するディレクトリ
-            └── RedHat-2.yml        # amazonlinux でこのテンプレートを利用する際に使う定義ファイル，元々のこのファイルが定義されていなく amazonlinux で動かすために作成
+        └── templates           # templateモジュールでセットアップされるJinja2形式のテキストファイルを配置するディレクトリ
+            ├── pg_hba.conf.j2      # postgresql 設定ファイルのテンプレート，このテンプレートに変数を代入したファイルが taget に配置される
+            └── postgres.sh.j2      # postgresql 設定ファイルのテンプレート，このテンプレートに変数を代入したファイルが taget に配置される
+     ```  
 ```
 
 
