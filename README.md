@@ -128,9 +128,40 @@ Ansible関連のファイル説明（必要なファイルのみ記述）
         │   └── variables.yml
         └── templates           # templateモジュールでセットアップされるJinja2形式のテキストファイルを配置するディレクトリ
             ├── pg_hba.conf.j2      # postgresql 設定ファイルのテンプレート，このテンプレートに変数を代入したファイルが taget に配置される
-            └── postgres.sh.j2      # postgresql 設定ファイルのテンプレート，このテンプレートに変数を代入したファイルが taget に配置される
-     ```  
+            └── postgres.sh.j2      # postgresql 設定ファイルのテンプレート，このテンプレートに変数を代入したファイルが taget に配置される  
 ```
+
+# Ansible を用いた postgresql 設定詳細
+
+- 行っていることは主に２つ
+    - Ansible の postgresql モジュールに必要な設定値を渡して postgresql を設定（ユーザー作成，DB作成 etc)
+        - postgresql_db: postgresql の db セットアップモジュール
+        - postgresql_user: postgresql の user セットアップモジュール
+    - Ansible と jinja テンプレートを用いて posrgresql 設定ファイルを生成し，target に配置（外部ホストからの接続設定等）
+
+- 外部からのアクセス設定
+    - `/var/lib/pgsql/data/postgresql.conf`
+        - DB へとアクセスを許可する ip を記述する設定ファイル
+        - ansible の linefile モジュールを用いて，デフォルトで生成される posrgresql.conf ファイルの記述を書き換える
+    - `/var/lib/pgsql/data/pg_hba.conf`
+        - DB への各ユーザー毎の接続設定を記述する設定ファイル
+        - ansible の template モジュールを用いて，生成したファイルを target に配置することで設定
+
+### pg_hba.conf の設定項目
+- type
+    - local: ローカルからの接続についての設定項目であることを示す
+    - host: 外部からの接続についての設定項目であることを示す
+- database
+    - どの db に対する設定か, all もしくは db 名を記載
+- user
+    - どの user に対する設定か，all もしくは db 名を記載
+- address
+    - どの ip アドレスからの接続についての設定か (CIDR で指定）
+- auth_method
+    - 認証方式, 色々存在
+    - basic: ベーシック認証，パスワードを平文で要求 (通信内容にそのまま記載される)
+    - md5: クライアントに対して認証時にMD5暗号化パスワードを要求
+        - md5形式では パスワード無し は無効なので，必ず何らかのパスワードを設定する必要がある
 
 
 
