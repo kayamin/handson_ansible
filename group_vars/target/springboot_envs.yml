@@ -1,0 +1,3 @@
+springboot_envs:
+  env: DEV
+  spring_password: "{{ spring_password }}"

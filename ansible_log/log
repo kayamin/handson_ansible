@@ -1159,3 +1159,327 @@ https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.
 2020-05-25 12:02:55,321 p=1731 u=root n=ansible | PLAY RECAP *****************************************************************************************************************
 2020-05-25 12:02:55,322 p=1731 u=root n=ansible | target01                   : ok=24   changed=1    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
 2020-05-25 12:02:55,322 p=1731 u=root n=ansible | target02                   : ok=24   changed=1    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
+2020-05-25 12:14:34,675 p=2034 u=root n=ansible | PLAY [target] **************************************************************************************************************
+2020-05-25 12:14:34,714 p=2034 u=root n=ansible | ERROR! We were unable to read either as JSON nor YAML, these are the errors we got from each:
+JSON: Expecting value: line 1 column 1 (char 0)
+
+Syntax Error while loading YAML.
+  found unacceptable key (unhashable type: 'AnsibleMapping')
+
+The error appears to be in '/var/data/group_vars/target/springboot_envs.yml': line 3, column 21, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+  env: DEV
+  spring_password: {{ spring_password }}
+                    ^ here
+We could be wrong, but this one looks like it might be an issue with
+missing quotes. Always quote template expression brackets when they
+start a value. For instance:
+
+    with_items:
+      - {{ foo }}
+
+Should be written as:
+
+    with_items:
+      - "{{ foo }}"
+
+2020-05-25 12:15:13,850 p=2040 u=root n=ansible | PLAY [target] **************************************************************************************************************
+2020-05-25 12:15:13,898 p=2040 u=root n=ansible | TASK [Gathering Facts] *****************************************************************************************************
+2020-05-25 12:15:16,007 p=2040 u=root n=ansible | [WARNING]: Platform linux on host target01 is using the discovered Python interpreter at /usr/bin/python, but future
+installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+
+2020-05-25 12:15:16,008 p=2040 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:16,026 p=2040 u=root n=ansible | [WARNING]: Platform linux on host target02 is using the discovered Python interpreter at /usr/bin/python, but future
+installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+
+2020-05-25 12:15:16,027 p=2040 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:16,059 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : include_tasks] ******************************************************************************
+2020-05-25 12:15:16,185 p=2040 u=root n=ansible | included: /var/data/roles/geerlingguy.postgresql/tasks/variables.yml for target01, target02
+2020-05-25 12:15:16,221 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : Include OS-specific variables (Debian).] ****************************************************
+2020-05-25 12:15:16,283 p=2040 u=root n=ansible | skipping: [target01]
+2020-05-25 12:15:16,304 p=2040 u=root n=ansible | skipping: [target02]
+2020-05-25 12:15:16,343 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : Include OS-specific variables (RedHat).] ****************************************************
+2020-05-25 12:15:16,410 p=2040 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:16,444 p=2040 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:16,476 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : Include OS-specific variables (Fedora).] ****************************************************
+2020-05-25 12:15:16,524 p=2040 u=root n=ansible | skipping: [target01]
+2020-05-25 12:15:16,564 p=2040 u=root n=ansible | skipping: [target02]
+2020-05-25 12:15:16,609 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : Define postgresql_packages.] ****************************************************************
+2020-05-25 12:15:16,664 p=2040 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:16,707 p=2040 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:16,744 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : Define postgresql_version.] *****************************************************************
+2020-05-25 12:15:16,797 p=2040 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:16,835 p=2040 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:16,867 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : Define postgresql_daemon.] ******************************************************************
+2020-05-25 12:15:16,921 p=2040 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:16,955 p=2040 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:16,989 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : Define postgresql_data_dir.] ****************************************************************
+2020-05-25 12:15:17,043 p=2040 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:17,080 p=2040 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:17,114 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : Define postgresql_bin_path.] ****************************************************************
+2020-05-25 12:15:17,173 p=2040 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:17,210 p=2040 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:17,247 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : Define postgresql_config_path.] *************************************************************
+2020-05-25 12:15:17,301 p=2040 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:17,336 p=2040 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:17,375 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : Define postgresql_unix_socket_directories_mode.] ********************************************
+2020-05-25 12:15:17,433 p=2040 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:17,467 p=2040 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:17,504 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : include_tasks] ******************************************************************************
+2020-05-25 12:15:17,667 p=2040 u=root n=ansible | included: /var/data/roles/geerlingguy.postgresql/tasks/setup-RedHat.yml for target01, target02
+2020-05-25 12:15:17,715 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : Ensure PostgreSQL packages are installed.] **************************************************
+2020-05-25 12:15:18,385 p=2040 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:18,387 p=2040 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:18,421 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : Ensure PostgreSQL Python libraries are installed.] ******************************************
+2020-05-25 12:15:18,857 p=2040 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:18,881 p=2040 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:18,917 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : include_tasks] ******************************************************************************
+2020-05-25 12:15:18,963 p=2040 u=root n=ansible | skipping: [target01]
+2020-05-25 12:15:18,993 p=2040 u=root n=ansible | skipping: [target02]
+2020-05-25 12:15:19,026 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : include_tasks] ******************************************************************************
+2020-05-25 12:15:19,147 p=2040 u=root n=ansible | included: /var/data/roles/geerlingguy.postgresql/tasks/initialize.yml for target01, target02
+2020-05-25 12:15:19,193 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : Set PostgreSQL environment variables.] ******************************************************
+2020-05-25 12:15:20,057 p=2040 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:20,078 p=2040 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:20,112 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : Ensure PostgreSQL data directory exists.] ***************************************************
+2020-05-25 12:15:20,423 p=2040 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:20,468 p=2040 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:20,506 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : Check if PostgreSQL database is initialized.] ***********************************************
+2020-05-25 12:15:20,821 p=2040 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:20,865 p=2040 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:20,903 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : Ensure PostgreSQL database is initialized.] *************************************************
+2020-05-25 12:15:20,956 p=2040 u=root n=ansible | skipping: [target01]
+2020-05-25 12:15:20,991 p=2040 u=root n=ansible | skipping: [target02]
+2020-05-25 12:15:21,022 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : include_tasks] ******************************************************************************
+2020-05-25 12:15:21,148 p=2040 u=root n=ansible | included: /var/data/roles/geerlingguy.postgresql/tasks/configure.yml for target01, target02
+2020-05-25 12:15:21,203 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : Configure global settings.] *****************************************************************
+2020-05-25 12:15:21,647 p=2040 u=root n=ansible | ok: [target02] => (item={'option': 'unix_socket_directories', 'value': '/var/run/postgresql'})
+2020-05-25 12:15:21,655 p=2040 u=root n=ansible | ok: [target01] => (item={'option': 'unix_socket_directories', 'value': '/var/run/postgresql'})
+2020-05-25 12:15:21,905 p=2040 u=root n=ansible | ok: [target02] => (item={'option': 'listen_addresses', 'value': '*'})
+2020-05-25 12:15:21,922 p=2040 u=root n=ansible | ok: [target01] => (item={'option': 'listen_addresses', 'value': '*'})
+2020-05-25 12:15:21,955 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : Configure host based authentication (if entries are configured).] ***************************
+2020-05-25 12:15:22,478 p=2040 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:22,522 p=2040 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:22,559 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : Ensure PostgreSQL unix socket dirs exist.] **************************************************
+2020-05-25 12:15:22,888 p=2040 u=root n=ansible | ok: [target01] => (item=/var/run/postgresql)
+2020-05-25 12:15:22,948 p=2040 u=root n=ansible | ok: [target02] => (item=/var/run/postgresql)
+2020-05-25 12:15:22,979 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : Ensure PostgreSQL is started and enabled on boot.] ******************************************
+2020-05-25 12:15:24,175 p=2040 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:24,188 p=2040 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:24,222 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : Ensure PostgreSQL users are present.] *******************************************************
+2020-05-25 12:15:24,642 p=2040 u=root n=ansible | ok: [target01] => (item={'name': 'jdoe', 'password': 'test'})
+2020-05-25 12:15:24,644 p=2040 u=root n=ansible | [WARNING]: Module did not set no_log for no_password_changes
+
+2020-05-25 12:15:24,663 p=2040 u=root n=ansible | ok: [target02] => (item={'name': 'jdoe', 'password': 'test'})
+2020-05-25 12:15:24,702 p=2040 u=root n=ansible | TASK [geerlingguy.postgresql : Ensure PostgreSQL databases are present.] ***************************************************
+2020-05-25 12:15:25,123 p=2040 u=root n=ansible | ok: [target02] => (item={'name': 'exampledb'})
+2020-05-25 12:15:25,127 p=2040 u=root n=ansible | ok: [target01] => (item={'name': 'exampledb'})
+2020-05-25 12:15:25,158 p=2040 u=root n=ansible | TASK [springboot : create sysconfig file] **********************************************************************************
+2020-05-25 12:15:25,477 p=2040 u=root n=ansible | changed: [target01]
+2020-05-25 12:15:25,525 p=2040 u=root n=ansible | changed: [target02]
+2020-05-25 12:15:25,529 p=2040 u=root n=ansible | PLAY RECAP *****************************************************************************************************************
+2020-05-25 12:15:25,530 p=2040 u=root n=ansible | target01                   : ok=25   changed=1    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
+2020-05-25 12:15:25,531 p=2040 u=root n=ansible | target02                   : ok=25   changed=1    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
+2020-05-25 12:15:36,169 p=2361 u=root n=ansible | PLAY [target] **************************************************************************************************************
+2020-05-25 12:15:36,210 p=2361 u=root n=ansible | TASK [Gathering Facts] *****************************************************************************************************
+2020-05-25 12:15:37,993 p=2361 u=root n=ansible | [WARNING]: Platform linux on host target02 is using the discovered Python interpreter at /usr/bin/python, but future
+installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+
+2020-05-25 12:15:37,996 p=2361 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:38,233 p=2361 u=root n=ansible | [WARNING]: Platform linux on host target01 is using the discovered Python interpreter at /usr/bin/python, but future
+installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+
+2020-05-25 12:15:38,234 p=2361 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:38,268 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : include_tasks] ******************************************************************************
+2020-05-25 12:15:38,401 p=2361 u=root n=ansible | included: /var/data/roles/geerlingguy.postgresql/tasks/variables.yml for target01, target02
+2020-05-25 12:15:38,441 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : Include OS-specific variables (Debian).] ****************************************************
+2020-05-25 12:15:38,486 p=2361 u=root n=ansible | skipping: [target01]
+2020-05-25 12:15:38,523 p=2361 u=root n=ansible | skipping: [target02]
+2020-05-25 12:15:38,557 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : Include OS-specific variables (RedHat).] ****************************************************
+2020-05-25 12:15:38,621 p=2361 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:38,661 p=2361 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:38,694 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : Include OS-specific variables (Fedora).] ****************************************************
+2020-05-25 12:15:38,747 p=2361 u=root n=ansible | skipping: [target01]
+2020-05-25 12:15:38,789 p=2361 u=root n=ansible | skipping: [target02]
+2020-05-25 12:15:38,822 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : Define postgresql_packages.] ****************************************************************
+2020-05-25 12:15:38,877 p=2361 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:38,923 p=2361 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:38,956 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : Define postgresql_version.] *****************************************************************
+2020-05-25 12:15:39,008 p=2361 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:39,042 p=2361 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:39,074 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : Define postgresql_daemon.] ******************************************************************
+2020-05-25 12:15:39,129 p=2361 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:39,166 p=2361 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:39,202 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : Define postgresql_data_dir.] ****************************************************************
+2020-05-25 12:15:39,256 p=2361 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:39,290 p=2361 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:39,327 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : Define postgresql_bin_path.] ****************************************************************
+2020-05-25 12:15:39,378 p=2361 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:39,421 p=2361 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:39,456 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : Define postgresql_config_path.] *************************************************************
+2020-05-25 12:15:39,506 p=2361 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:39,547 p=2361 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:39,584 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : Define postgresql_unix_socket_directories_mode.] ********************************************
+2020-05-25 12:15:39,634 p=2361 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:39,676 p=2361 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:39,708 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : include_tasks] ******************************************************************************
+2020-05-25 12:15:39,861 p=2361 u=root n=ansible | included: /var/data/roles/geerlingguy.postgresql/tasks/setup-RedHat.yml for target01, target02
+2020-05-25 12:15:39,909 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : Ensure PostgreSQL packages are installed.] **************************************************
+2020-05-25 12:15:40,616 p=2361 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:40,626 p=2361 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:40,661 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : Ensure PostgreSQL Python libraries are installed.] ******************************************
+2020-05-25 12:15:41,086 p=2361 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:41,125 p=2361 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:41,159 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : include_tasks] ******************************************************************************
+2020-05-25 12:15:41,210 p=2361 u=root n=ansible | skipping: [target01]
+2020-05-25 12:15:41,245 p=2361 u=root n=ansible | skipping: [target02]
+2020-05-25 12:15:41,279 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : include_tasks] ******************************************************************************
+2020-05-25 12:15:41,396 p=2361 u=root n=ansible | included: /var/data/roles/geerlingguy.postgresql/tasks/initialize.yml for target01, target02
+2020-05-25 12:15:41,445 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : Set PostgreSQL environment variables.] ******************************************************
+2020-05-25 12:15:42,285 p=2361 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:42,292 p=2361 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:42,323 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : Ensure PostgreSQL data directory exists.] ***************************************************
+2020-05-25 12:15:42,635 p=2361 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:42,678 p=2361 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:42,709 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : Check if PostgreSQL database is initialized.] ***********************************************
+2020-05-25 12:15:43,016 p=2361 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:43,059 p=2361 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:43,091 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : Ensure PostgreSQL database is initialized.] *************************************************
+2020-05-25 12:15:43,146 p=2361 u=root n=ansible | skipping: [target01]
+2020-05-25 12:15:43,179 p=2361 u=root n=ansible | skipping: [target02]
+2020-05-25 12:15:43,213 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : include_tasks] ******************************************************************************
+2020-05-25 12:15:43,334 p=2361 u=root n=ansible | included: /var/data/roles/geerlingguy.postgresql/tasks/configure.yml for target01, target02
+2020-05-25 12:15:43,388 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : Configure global settings.] *****************************************************************
+2020-05-25 12:15:43,881 p=2361 u=root n=ansible | ok: [target02] => (item={'option': 'unix_socket_directories', 'value': '/var/run/postgresql'})
+2020-05-25 12:15:43,889 p=2361 u=root n=ansible | ok: [target01] => (item={'option': 'unix_socket_directories', 'value': '/var/run/postgresql'})
+2020-05-25 12:15:44,146 p=2361 u=root n=ansible | ok: [target02] => (item={'option': 'listen_addresses', 'value': '*'})
+2020-05-25 12:15:44,150 p=2361 u=root n=ansible | ok: [target01] => (item={'option': 'listen_addresses', 'value': '*'})
+2020-05-25 12:15:44,182 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : Configure host based authentication (if entries are configured).] ***************************
+2020-05-25 12:15:44,728 p=2361 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:44,787 p=2361 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:44,822 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : Ensure PostgreSQL unix socket dirs exist.] **************************************************
+2020-05-25 12:15:45,192 p=2361 u=root n=ansible | ok: [target01] => (item=/var/run/postgresql)
+2020-05-25 12:15:45,208 p=2361 u=root n=ansible | ok: [target02] => (item=/var/run/postgresql)
+2020-05-25 12:15:45,244 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : Ensure PostgreSQL is started and enabled on boot.] ******************************************
+2020-05-25 12:15:46,437 p=2361 u=root n=ansible | ok: [target01]
+2020-05-25 12:15:46,441 p=2361 u=root n=ansible | ok: [target02]
+2020-05-25 12:15:46,472 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : Ensure PostgreSQL users are present.] *******************************************************
+2020-05-25 12:15:46,919 p=2361 u=root n=ansible | ok: [target02] => (item={'name': 'jdoe', 'password': 'test'})
+2020-05-25 12:15:46,923 p=2361 u=root n=ansible | [WARNING]: Module did not set no_log for no_password_changes
+
+2020-05-25 12:15:46,925 p=2361 u=root n=ansible | ok: [target01] => (item={'name': 'jdoe', 'password': 'test'})
+2020-05-25 12:15:46,966 p=2361 u=root n=ansible | TASK [geerlingguy.postgresql : Ensure PostgreSQL databases are present.] ***************************************************
+2020-05-25 12:15:47,378 p=2361 u=root n=ansible | ok: [target01] => (item={'name': 'exampledb'})
+2020-05-25 12:15:47,398 p=2361 u=root n=ansible | ok: [target02] => (item={'name': 'exampledb'})
+2020-05-25 12:15:47,442 p=2361 u=root n=ansible | TASK [springboot : create sysconfig file] **********************************************************************************
+2020-05-25 12:15:48,192 p=2361 u=root n=ansible | changed: [target01]
+2020-05-25 12:15:48,193 p=2361 u=root n=ansible | changed: [target02]
+2020-05-25 12:15:48,197 p=2361 u=root n=ansible | PLAY RECAP *****************************************************************************************************************
+2020-05-25 12:15:48,198 p=2361 u=root n=ansible | target01                   : ok=25   changed=1    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
+2020-05-25 12:15:48,199 p=2361 u=root n=ansible | target02                   : ok=25   changed=1    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
+2020-05-25 12:20:05,015 p=2692 u=root n=ansible | PLAY [target] **************************************************************************************************************
+2020-05-25 12:20:05,053 p=2692 u=root n=ansible | TASK [Gathering Facts] *****************************************************************************************************
+2020-05-25 12:20:07,104 p=2692 u=root n=ansible | [WARNING]: Platform linux on host target01 is using the discovered Python interpreter at /usr/bin/python, but future
+installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+
+2020-05-25 12:20:07,105 p=2692 u=root n=ansible | ok: [target01]
+2020-05-25 12:20:07,184 p=2692 u=root n=ansible | [WARNING]: Platform linux on host target02 is using the discovered Python interpreter at /usr/bin/python, but future
+installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+
+2020-05-25 12:20:07,187 p=2692 u=root n=ansible | ok: [target02]
+2020-05-25 12:20:07,222 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : include_tasks] ******************************************************************************
+2020-05-25 12:20:07,359 p=2692 u=root n=ansible | included: /var/data/roles/geerlingguy.postgresql/tasks/variables.yml for target01, target02
+2020-05-25 12:20:07,397 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : Include OS-specific variables (Debian).] ****************************************************
+2020-05-25 12:20:07,445 p=2692 u=root n=ansible | skipping: [target01]
+2020-05-25 12:20:07,488 p=2692 u=root n=ansible | skipping: [target02]
+2020-05-25 12:20:07,521 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : Include OS-specific variables (RedHat).] ****************************************************
+2020-05-25 12:20:07,585 p=2692 u=root n=ansible | ok: [target01]
+2020-05-25 12:20:07,634 p=2692 u=root n=ansible | ok: [target02]
+2020-05-25 12:20:07,671 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : Include OS-specific variables (Fedora).] ****************************************************
+2020-05-25 12:20:07,721 p=2692 u=root n=ansible | skipping: [target01]
+2020-05-25 12:20:07,750 p=2692 u=root n=ansible | skipping: [target02]
+2020-05-25 12:20:07,785 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : Define postgresql_packages.] ****************************************************************
+2020-05-25 12:20:07,839 p=2692 u=root n=ansible | ok: [target01]
+2020-05-25 12:20:07,876 p=2692 u=root n=ansible | ok: [target02]
+2020-05-25 12:20:07,909 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : Define postgresql_version.] *****************************************************************
+2020-05-25 12:20:07,964 p=2692 u=root n=ansible | ok: [target01]
+2020-05-25 12:20:07,997 p=2692 u=root n=ansible | ok: [target02]
+2020-05-25 12:20:08,030 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : Define postgresql_daemon.] ******************************************************************
+2020-05-25 12:20:08,081 p=2692 u=root n=ansible | ok: [target01]
+2020-05-25 12:20:08,122 p=2692 u=root n=ansible | ok: [target02]
+2020-05-25 12:20:08,155 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : Define postgresql_data_dir.] ****************************************************************
+2020-05-25 12:20:08,209 p=2692 u=root n=ansible | ok: [target01]
+2020-05-25 12:20:08,245 p=2692 u=root n=ansible | ok: [target02]
+2020-05-25 12:20:08,276 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : Define postgresql_bin_path.] ****************************************************************
+2020-05-25 12:20:08,330 p=2692 u=root n=ansible | ok: [target01]
+2020-05-25 12:20:08,362 p=2692 u=root n=ansible | ok: [target02]
+2020-05-25 12:20:08,397 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : Define postgresql_config_path.] *************************************************************
+2020-05-25 12:20:08,451 p=2692 u=root n=ansible | ok: [target01]
+2020-05-25 12:20:08,489 p=2692 u=root n=ansible | ok: [target02]
+2020-05-25 12:20:08,524 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : Define postgresql_unix_socket_directories_mode.] ********************************************
+2020-05-25 12:20:08,582 p=2692 u=root n=ansible | ok: [target01]
+2020-05-25 12:20:08,626 p=2692 u=root n=ansible | ok: [target02]
+2020-05-25 12:20:08,670 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : include_tasks] ******************************************************************************
+2020-05-25 12:20:08,839 p=2692 u=root n=ansible | included: /var/data/roles/geerlingguy.postgresql/tasks/setup-RedHat.yml for target01, target02
+2020-05-25 12:20:08,893 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : Ensure PostgreSQL packages are installed.] **************************************************
+2020-05-25 12:20:09,602 p=2692 u=root n=ansible | ok: [target02]
+2020-05-25 12:20:09,605 p=2692 u=root n=ansible | ok: [target01]
+2020-05-25 12:20:09,639 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : Ensure PostgreSQL Python libraries are installed.] ******************************************
+2020-05-25 12:20:10,046 p=2692 u=root n=ansible | ok: [target01]
+2020-05-25 12:20:10,113 p=2692 u=root n=ansible | ok: [target02]
+2020-05-25 12:20:10,147 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : include_tasks] ******************************************************************************
+2020-05-25 12:20:10,195 p=2692 u=root n=ansible | skipping: [target01]
+2020-05-25 12:20:10,229 p=2692 u=root n=ansible | skipping: [target02]
+2020-05-25 12:20:10,267 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : include_tasks] ******************************************************************************
+2020-05-25 12:20:10,397 p=2692 u=root n=ansible | included: /var/data/roles/geerlingguy.postgresql/tasks/initialize.yml for target01, target02
+2020-05-25 12:20:10,445 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : Set PostgreSQL environment variables.] ******************************************************
+2020-05-25 12:20:11,337 p=2692 u=root n=ansible | ok: [target01]
+2020-05-25 12:20:11,342 p=2692 u=root n=ansible | ok: [target02]
+2020-05-25 12:20:11,375 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : Ensure PostgreSQL data directory exists.] ***************************************************
+2020-05-25 12:20:11,703 p=2692 u=root n=ansible | ok: [target01]
+2020-05-25 12:20:11,727 p=2692 u=root n=ansible | ok: [target02]
+2020-05-25 12:20:11,760 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : Check if PostgreSQL database is initialized.] ***********************************************
+2020-05-25 12:20:12,066 p=2692 u=root n=ansible | ok: [target01]
+2020-05-25 12:20:12,109 p=2692 u=root n=ansible | ok: [target02]
+2020-05-25 12:20:12,141 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : Ensure PostgreSQL database is initialized.] *************************************************
+2020-05-25 12:20:12,187 p=2692 u=root n=ansible | skipping: [target01]
+2020-05-25 12:20:12,223 p=2692 u=root n=ansible | skipping: [target02]
+2020-05-25 12:20:12,255 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : include_tasks] ******************************************************************************
+2020-05-25 12:20:12,378 p=2692 u=root n=ansible | included: /var/data/roles/geerlingguy.postgresql/tasks/configure.yml for target01, target02
+2020-05-25 12:20:12,431 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : Configure global settings.] *****************************************************************
+2020-05-25 12:20:12,908 p=2692 u=root n=ansible | ok: [target01] => (item={'option': 'unix_socket_directories', 'value': '/var/run/postgresql'})
+2020-05-25 12:20:12,914 p=2692 u=root n=ansible | ok: [target02] => (item={'option': 'unix_socket_directories', 'value': '/var/run/postgresql'})
+2020-05-25 12:20:13,177 p=2692 u=root n=ansible | ok: [target01] => (item={'option': 'listen_addresses', 'value': '*'})
+2020-05-25 12:20:13,181 p=2692 u=root n=ansible | ok: [target02] => (item={'option': 'listen_addresses', 'value': '*'})
+2020-05-25 12:20:13,213 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : Configure host based authentication (if entries are configured).] ***************************
+2020-05-25 12:20:13,765 p=2692 u=root n=ansible | ok: [target01]
+2020-05-25 12:20:13,788 p=2692 u=root n=ansible | ok: [target02]
+2020-05-25 12:20:13,825 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : Ensure PostgreSQL unix socket dirs exist.] **************************************************
+2020-05-25 12:20:14,144 p=2692 u=root n=ansible | ok: [target01] => (item=/var/run/postgresql)
+2020-05-25 12:20:14,202 p=2692 u=root n=ansible | ok: [target02] => (item=/var/run/postgresql)
+2020-05-25 12:20:14,235 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : Ensure PostgreSQL is started and enabled on boot.] ******************************************
+2020-05-25 12:20:15,427 p=2692 u=root n=ansible | ok: [target01]
+2020-05-25 12:20:15,431 p=2692 u=root n=ansible | ok: [target02]
+2020-05-25 12:20:15,462 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : Ensure PostgreSQL users are present.] *******************************************************
+2020-05-25 12:20:15,885 p=2692 u=root n=ansible | ok: [target01] => (item={'name': 'jdoe', 'password': 'test'})
+2020-05-25 12:20:15,886 p=2692 u=root n=ansible | [WARNING]: Module did not set no_log for no_password_changes
+
+2020-05-25 12:20:15,892 p=2692 u=root n=ansible | ok: [target02] => (item={'name': 'jdoe', 'password': 'test'})
+2020-05-25 12:20:15,925 p=2692 u=root n=ansible | TASK [geerlingguy.postgresql : Ensure PostgreSQL databases are present.] ***************************************************
+2020-05-25 12:20:16,341 p=2692 u=root n=ansible | ok: [target01] => (item={'name': 'exampledb'})
+2020-05-25 12:20:16,350 p=2692 u=root n=ansible | ok: [target02] => (item={'name': 'exampledb'})
+2020-05-25 12:20:16,383 p=2692 u=root n=ansible | TASK [springboot : create sysconfig file] **********************************************************************************
+2020-05-25 12:20:17,152 p=2692 u=root n=ansible | changed: [target02]
+2020-05-25 12:20:17,156 p=2692 u=root n=ansible | changed: [target01]
+2020-05-25 12:20:17,161 p=2692 u=root n=ansible | PLAY RECAP *****************************************************************************************************************
+2020-05-25 12:20:17,162 p=2692 u=root n=ansible | target01                   : ok=25   changed=1    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
+2020-05-25 12:20:17,163 p=2692 u=root n=ansible | target02                   : ok=25   changed=1    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   

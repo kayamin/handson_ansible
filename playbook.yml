@@ -5,3 +5,6 @@
     # 更に main.yml 内で include-tasks とすることで，他のymlファイルも task として追加することができる
     - role: geerlingguy.postgresql
       become: yes
+
+    - role: springboot
+

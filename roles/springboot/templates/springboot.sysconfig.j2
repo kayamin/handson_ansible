@@ -1,0 +1,3 @@
+{% for key in springboot_envs.keys() | sort %}
+{{ key | upper }}={{ springboot_envs[key] }}
+{% endfor %}
