@@ -142,7 +142,7 @@ Ansible関連のファイル説明（必要なファイルのみ記述）
 - 外部からのアクセス設定
     - `/var/lib/pgsql/data/postgresql.conf`
         - DB へとアクセスを許可する ip を記述する設定ファイル
-        - ansible の linefile モジュールを用いて，デフォルトで生成される posrgresql.conf ファイルの記述を書き換える
+        - ansible の lineinfile モジュールを用いて，デフォルトで生成される posrgresql.conf ファイルの記述を書き換える
     - `/var/lib/pgsql/data/pg_hba.conf`
         - DB への各ユーザー毎の接続設定を記述する設定ファイル
         - ansible の template モジュールを用いて，生成したファイルを target に配置することで設定
